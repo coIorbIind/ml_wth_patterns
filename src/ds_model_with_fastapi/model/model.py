@@ -70,5 +70,22 @@ class Model(metaclass=MetaSingleton):
         torch.save(self.cnn_model, target_path)
 
 
+class FileModelAdapter:
+    def __init__(self, model_class: Model):
+        self.model = model_class
+        self.num_class_dict = {
+            0: 'CAT',
+            1: 'DOG',
+        }
+
+    def predict(self, file_obj) -> str:
+        vect_img = cv2.imdecode(file_obj)
+
+        return self.num_class_dict[self.model.predict(vect_img)]
+    
+    def train(self) -> None:
+        self.model.train()
+
+
 def get_model():
     return Model()

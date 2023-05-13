@@ -1,47 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href="css/style.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<title>Patterns</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <title>Patterns</title>
 </head>
 <body>
-	<form>
-		<p style="text-align: center; font-size: 25px;">Загрузите ваше фотографию для того, чтобы узнать, кто вы: кошка/собака</p>
-		<form action="uploadImages.php" method="post" enctype="multipart/form-data" id="uploadImages">
-			<div class="give-image">
-				<div class="image">
-					<input type="file" id="addImages" multiple="">
-					<input type="hidden" name="azaza" value="zazaza">
-					<ul id="uploadImagesList">
-							<div class="item template">
-								<span class="img-wrap">
-										<img src="image.jpg" width="150" height="150" alt="">
-								</span>
-									<!-- <span  title="Удалить">Удалить</span> -->
-							</div>
-					</ul>
-			
-					<div class="clear"></div>
-					<div>
-							<button class="delete-link">Удалить</button>
-							<input type="submit" value="Отправить">
-					</div>
-				</div>
-			</div>
-		</form>
-		</div>
-		<p style="text-align: center; font-size: 30px;">Результат:</p>
-		<div class="result">
-			<p style="text-align: center; font-size: 30px; font-weight: 500;">You are Cat</p>
-		</div>
-	</form>
-	<script src="./js/script.js"></script>
+<form>
+    <p style="text-align: center; font-size: 25px;">Загрузите фотографию для того, чтобы узнать, кто на ней изображен:
+        кошка или собака</p>
+    <form action="/upload" method="post" enctype="multipart/form-data" id="uploadImages">
+        <div class="give-image">
+            <div class="image">
+                <div class="button-wrapper">
+                    <input type="file" id="my_image">
+                </div>
+                <div class="item template ff" >
+                    <span class="img-wrap">
+                        <img id="my_image_preview" src="image.jpg" width="270" height="270" alt="">
+                    </span>
+                </div>
+                <div class="button-wrapper">
+                    <button style="margin-right: 20px" class="delete-link">Удалить</button>
+                    <input type="submit" value="Отправить">
+                </div>
+            </div>
+        </div>
+    </form>
+    </div>
+    <p style="text-align: center; font-size: 30px;">Результат:</p>
+    <div class="result">
+        <p style="text-align: center; font-size: 30px; font-weight: 500;" id="prediction">Это ...</p>
+    </div>
+</form>
+<script src="./js/script.js"></script>
 </body>
 </html>

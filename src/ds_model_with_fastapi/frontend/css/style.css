@@ -3,7 +3,18 @@ body {
 	background-color: #eedfaf;
 	font-weight: 400;
 }
+#my_image {
+	margin-bottom: 20px;
+}
 
+.button-wrapper{
+  display: flex;
+  justify-content: center;
+}
+
+.ff {
+	margin-bottom: 10px;
+}
 .give-image {
 	position: relative;
 	display: block;
@@ -11,8 +22,8 @@ body {
 	background-color: #e7e7e7;
 	border: 2px solid black;
 	border-radius: 30px;
-	width: 80%;
-	min-height: 300px;
+	width: 40%;
+	min-height: 470px;
 	margin-bottom: 30px;
 	margin-top: 30px;
 

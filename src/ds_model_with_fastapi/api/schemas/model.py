@@ -8,4 +8,9 @@ class RequestModelSchema(BaseModel):
 
 class ResponseModelSchema(BaseModel):
     """Схема данных, которые получает пользователь"""
-    prediction: str
+    prediction: str | None
+
+
+class TrainModelSchema(BaseModel):
+    """Схема данных, которые возвращаются при запросе на обучение"""
+    trained: bool

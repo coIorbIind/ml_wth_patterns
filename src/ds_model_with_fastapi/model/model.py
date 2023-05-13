@@ -4,8 +4,10 @@ import numpy as np
 from pickle import UnpicklingError
 from torchvision.models import resnet50, ResNet50_Weights
 
+from checksumdir import dirhash
+
 from ds_model_with_fastapi.config.config import settings
-from .train import train
+from ds_model_with_fastapi.model.train import train
 
 
 class MetaSingleton(type):
@@ -21,6 +23,8 @@ class MetaSingleton(type):
 class Model(metaclass=MetaSingleton):
     """Класс DS модели"""
     def __init__(self):
+        self.directory_hash = dirhash(settings.TRAIN_SETTINGS.TRAIN_DATA_DIR, 'md5')
+
         self.data_prep_pipeline = settings.PREP_PIPELINE
         # Load model from disk or train new
         self.cnn_model = Model.load_model(settings.MODEL_PATH)
@@ -74,18 +78,21 @@ class FileModelAdapter:
     def __init__(self, model_class: Model):
         self.model = model_class
         self.num_class_dict = {
-            0: 'CAT',
-            1: 'DOG',
+            0: 'кошечка',
+            1: 'собачка',
         }
 
     def predict(self, file_obj) -> str:
-        vect_img = cv2.imdecode(file_obj)
+        byte_img = file_obj.read()
 
-        return self.num_class_dict[self.model.predict(vect_img)]
+        np_arr = np.fromstring(byte_img, np.uint8)
+        vect_img = cv2.imdecode(np_arr, cv2.IMREAD_COLOR)
+
+        return self.num_class_dict.get(self.model.predict(vect_img))
     
     def train(self) -> None:
         self.model.train()
 
 
 def get_model():
-    return Model()
+    return FileModelAdapter(Model())
